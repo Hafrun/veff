@@ -1,0 +1,45 @@
+﻿@model IEnumerable<VideoBlogApplication.Models.Comment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Video blog application</h2>
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/OgGbNJdMaTY" frameborder="0" allowfullscreen></iframe>
+
+<div class="comments"></div>
+
+    <script type="text/html" id="template">
+
+        <li class="list-group-item" style="max-width: 560px;">
+            <p>
+                <span class="glyphicon glyphicon-user"></span>
+                <span class="text-primary" data-content="Username"></span>
+                <span data-content="CommentText"></span>
+            </p>
+            <p>
+                <span class="text-muted" data-content="CommentDate"></span>
+                <a class="like-comment" href="#">Like <span class="glyphicon glyphicon-thumbs-up"></span></a>
+            </p>
+
+        </li>
+    </script>
+ 
+
+<li class="list-group-item">
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <label class="sr-only" for="CommentText">Comment</label>
+            <textarea class="form-control" rows="3" id="CommentText" name="CommentText"></textarea>
+            <input type="button" id="comment-button" value="Send" />
+        </div>
+        @Html.ValidationSummary(false)
+    }
+</li>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="MyJquery.js"></script>
+<script src="~/Scripts/jquery.loadTemplate-1.4.1.js"></script>
