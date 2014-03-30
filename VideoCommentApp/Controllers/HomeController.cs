@@ -76,7 +76,7 @@ namespace VideoCommentApp.Controllers
             return Json(c, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult getAllComments()
         {
             var model = CommentRepository.Instance.GetComments();
@@ -92,7 +92,7 @@ namespace VideoCommentApp.Controllers
             return Json(c, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
+        [HttpGet]
         public ActionResult getLikes()
         {
             var model = CommentRepository.Instance.GetComments();

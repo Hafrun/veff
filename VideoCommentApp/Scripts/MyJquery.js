@@ -6,7 +6,6 @@ function (list) {
 })
 
 function loadComments() {
-    // Athugum hvort við viljum appenda eða ekki
     var append = false;
     if ($('#comment-button').is(':checked')) {
         append = true;
