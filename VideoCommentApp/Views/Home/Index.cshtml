@@ -11,11 +11,14 @@
 <div class="comments"></div>
 
     <script type="text/html" id="template">
+        @foreach (var item in Model)
+    {
 
         <li class="list-group-item" style="max-width: 560px;">
             <p>
                 <span class="glyphicon glyphicon-user"></span>
-                <span class="text-primary" data-content="Username"></span>
+                <span class="text-primary" data-content="Username">@Html.DisplayFor(modelItem => item.Username)</span>
+                <span>@Html.DisplayFor(modelItem => item.CommentText)</span>
                 <span data-content="CommentText"></span>
             </p>
             <p>
@@ -24,6 +27,7 @@
             </p>
 
         </li>
+        }
     </script>
  
 
@@ -31,7 +35,7 @@
     @using (Html.BeginForm())
     {
         <div class="form-horizontal">
-            <label class="sr-only" for="CommentText">Comment</label>
+            <label class="sr-only" for="CommentText" id="comment-text">Comment</label>
             <textarea class="form-control" rows="3" id="CommentText" name="CommentText"></textarea>
             <input type="button" id="comment-button" value="Send" />
         </div>
