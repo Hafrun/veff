@@ -54,7 +54,7 @@ function comment_post_btn_click() {
                 )
                 .success(
                 function (data) {
-                    loadComments();
+                    comment_insert();
                     console.log("ResponseText:" + data);
                 }
                 );
@@ -71,23 +71,13 @@ function comment_post_btn_click() {
 function comment_insert() {
 
     var t = '';
-    t += '';
-    t += '<li class="list-group-item">';
     t += '<p><span class="glyphicon glyphicon-user"></span>';
-    t += '<span class="text-primary" data-content="Username"></span>';
-    t += '<span data-content="CommentText"></span></p>';
-    t += '<p> <span class="text-muted" data-content="CommentDate"></span>';
+    t += '<span class="text-primary" data-content="Username"> Mitt Nafn</span>';
+    t += '<span data-content="CommentText"> Mitt comment</span></p>';
+    t += '<p> <span class="text-muted" data-content="CommentDate"> Dagsetningin her</span>';
     t += '<a class="like-comment" href="#">Like <span class="glyphicon glyphicon-thumbs-up"></span></a></p>';
-    t += '</li>';
-    t += '<li class="list-group-item">';
-    t += '<div class="form-horizontal">';
-    t += '<label class="sr-only" for="CommentText">Comment</label>';
-    t += '<textarea class="form-control" rows="3" id="CommentText" name="CommentText"></textarea>';
-    //t += '<button type="submit" class="btn btn-primary" id="button">Send</button>';
-    t += '</div>';
-    t += '</li>';
 
-    $("#commentList").prepend(t);
+    $(".list-group-item").prepend(t);
 
 }
 
