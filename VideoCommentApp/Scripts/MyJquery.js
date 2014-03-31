@@ -40,46 +40,6 @@ function loadComments() {
     });
 }
 
-function comment_post_btn_click() {
-    var text = $("#CommentText").val();
-    console.log(text);
-    if (text.length > 0) {
-        $.post("/Home/AddComment",
-                {
-                    task: "comment_insert",
-                    comment: text
-                }
-                ).error(
-                function () {
-                    console.log("Error:");
-                }
-                )
-                .success(
-                function (data) {
-                    comment_insert();
-                    console.log("ResponseText:" + data);
-                }
-                );
-    }
-    else {
-        console.log("The text area was empty")
-    }
-
-    var text = $("#CommentText").val("");
-}
-
-function comment_insert() {
-
-    var t = '';
-    t += '<p><span class="glyphicon glyphicon-user"></span>';
-    t += '<span class="text-primary" data-content="Username"> Mitt Nafn</span>';
-    t += '<span data-content="CommentText"> Mitt comment</span></p>';
-    t += '<p> <span class="text-muted" data-content="CommentDate"> Dagsetningin her</span>';
-    t += '<a class="like-comment" href="#">Like <span class="glyphicon glyphicon-thumbs-up"></span></a></p>';
-
-    $(".list-group-item").prepend(t);
-
-}
 
 $('document').ready(function () {
     loadComments();

@@ -15,39 +15,6 @@ namespace VideoCommentApp.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-       /* public ActionResult Index(FormCollection formData)
-        {
-            String strComment = formData["CommentText"];
-            if (!String.IsNullOrEmpty(strComment))
-            {
-                Comment c = new Comment();
-
-                c.CommentText = strComment;
-                String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-                if (!String.IsNullOrEmpty(strUser))
-                {
-                    int slashPos = strUser.IndexOf("\\");
-                    if (slashPos != -1)
-                    {
-                        strUser = strUser.Substring(slashPos + 1);
-                    }
-                    c.Username = strUser;
-
-                    CommentRepository.Instance.AddComment(c);
-                }
-                else
-                {
-                    c.Username = "Unknown user";
-                }
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                ModelState.AddModelError("CommentText", "Comment text cannot be empty!");
-                return Index();
-            }
-        }*/
 
         public string getUser()
         {
