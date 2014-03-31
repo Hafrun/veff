@@ -1,5 +1,5 @@
 ﻿//sækjum fjölda commenta á serverinn
-/*function getCommentServerCount(){
+function getCommentServerCount(){
         var count = 0;
         $.ajax({
                 type: "GET",
@@ -12,7 +12,7 @@
                 }
                 });
                 return count;
-}*/
+}
 
 function loadComments() {
     // Athugum hvort við viljum appenda eða ekki
@@ -30,7 +30,7 @@ function loadComments() {
     });
 }
 
-/*
+
 $(document).ready(function () {
 
     $("#button").click(function () {
@@ -40,6 +40,7 @@ $(document).ready(function () {
 
 function comment_post_btn_click() {
     var text = $("#CommentText").val();
+    console.log(text);
     if (text.length > 0) {
         $.post("/Home/AddComment",
                 {
@@ -70,16 +71,30 @@ function comment_post_btn_click() {
 function comment_insert() {
 
     var t = '';
-    t += '<ul id="commentList"></ul>';
+    t += '';
+    t += '<li class="list-group-item">';
+    t += '<p><span class="glyphicon glyphicon-user"></span>';
+    t += '<span class="text-primary" data-content="Username"></span>';
+    t += '<span data-content="CommentText"></span></p>';
+    t += '<p> <span class="text-muted" data-content="CommentDate"></span>';
+    t += '<a class="like-comment" href="#">Like <span class="glyphicon glyphicon-thumbs-up"></span></a></p>';
+    t += '</li>';
+    t += '<li class="list-group-item">';
+    t += '<div class="form-horizontal">';
+    t += '<label class="sr-only" for="CommentText">Comment</label>';
+    t += '<textarea class="form-control" rows="3" id="CommentText" name="CommentText"></textarea>';
+    //t += '<button type="submit" class="btn btn-primary" id="button">Send</button>';
+    t += '</div>';
+    t += '</li>';
 
-    $(".list-group").prepend(t);
+    $("#commentList").prepend(t);
 
-}*/
+}
 
 $('document').ready(function () {
         loadComments();
         $("#button").click(function () {
-                var temp = $("#CommentText").val();
+            var temp = $("#CommentText").val();
                 var append;
                 $.ajax({
                         type: "POST",
@@ -91,7 +106,9 @@ $('document').ready(function () {
                                 //til að athuga hvort hefur komið comment á meðan póstað er
                                 //count comment + 1 == count from server
                                 //alert(success)
-                                loadComments();
+                            loadComments();
+                            //console.log("Smjör er gott fyrir sálina");
+                            //console.log("Textinn minn: " + temp);
                         },
                
                                 //ef ekkert var skrifað á meðan póstað var
