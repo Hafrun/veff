@@ -13,11 +13,10 @@ namespace VideoCommentApp.Controllers
         {
             var model = CommentRepository.Instance.GetComments();
             return View(model);
-            //return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        public ActionResult Index(FormCollection formData)
+        //[HttpPost]
+       /* public ActionResult Index(FormCollection formData)
         {
             String strComment = formData["CommentText"];
             if (!String.IsNullOrEmpty(strComment))
@@ -48,29 +47,40 @@ namespace VideoCommentApp.Controllers
                 ModelState.AddModelError("CommentText", "Comment text cannot be empty!");
                 return Index();
             }
-        }
+        }*/
 
-        public ActionResult Date(int? id)
+        public string getUser()
         {
-            var result = CommentRepository.Instance.GetComments();
-            var newResult = from d in result
-                            select new
-                            {
-                                CommentDate = d.CommentDate.ToString(),
-                                ID = d.ID,
-                                CommentText = d.CommentText,
-                                Username = d.Username
-                            };
-            return Json(newResult, JsonRequestBehavior.AllowGet);
+            String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            if (!String.IsNullOrEmpty(strUser))
+            {
+                int slashPos = strUser.IndexOf("\\");
+                if (slashPos != -1)
+                {
+                    strUser = strUser.Substring(slashPos + 1);
+                }
+            }
+            else
+            {
+                strUser = "Unknown user";
+            }
+            return strUser;
         }
 
         [HttpPost]
-        public ActionResult AddComment(string commentText)
+        public ActionResult AddComment(Comment c)
         {
-            Comment c = new Comment();
-            c.CommentText = commentText;
-
-            return Json(c, JsonRequestBehavior.AllowGet);
+            if (!String.IsNullOrEmpty(c.CommentText))
+            {
+                c.Username = getUser();
+                CommentRepository.Instance.AddComment(c);
+                foreach (Comment com in CommentRepository.Instance.GetComments())
+                {
+                    System.Console.WriteLine(com.CommentText);
+                }
+            }
+            var comments = CommentRepository.Instance.GetComments();
+            return Json(comments, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
