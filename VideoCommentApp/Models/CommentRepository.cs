@@ -54,6 +54,12 @@ namespace VideoBlogApplication.Models
             c.CommentDate = DateTime.Now;
             m_comments.Add(c);
         }
+
+        public int CountComments()
+        {
+            return m_comments.Count();
+        }
+
         public IEnumerable<Likes> GetLikes(int id)
         {
             var result = from c in m_likes

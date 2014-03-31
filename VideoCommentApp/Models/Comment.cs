@@ -12,6 +12,5 @@ namespace VideoBlogApplication.Models
         public String CommentText { get; set; }
         public DateTime CommentDate { get; set; }
 
-        public int Counter { get; set; }
     }
 }

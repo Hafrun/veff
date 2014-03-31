@@ -13,8 +13,8 @@ namespace VideoCommentApp.Controllers
         public ActionResult Index()
         {
             var model = CommentRepository.Instance.GetComments();
-            return Json(model, JsonRequestBehavior.AllowGet); 
-            //return View(model);
+            //return Json(model, JsonRequestBehavior.AllowGet); 
+            return View(model);
         }
 
         [HttpPost]
