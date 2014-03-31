@@ -16,38 +16,58 @@ namespace VideoCommentApp.Controllers
             //return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        public ActionResult Index(FormCollection formData)
+        //[HttpPost]
+        //public ActionResult Index(Comment c)
+        //{
+           
+
+            //String strComment = formData["CommentText"];
+            //if (!String.IsNullOrEmpty(strComment))
+            //{
+            //    Comment c = new Comment();
+
+            //    c.CommentText = strComment;
+            //    String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            //    if (!String.IsNullOrEmpty(strUser))
+            //    {
+            //        int slashPos = strUser.IndexOf("\\");
+            //        if (slashPos != -1)
+            //        {
+            //            strUser = strUser.Substring(slashPos + 1);
+            //        }
+            //        c.Username = strUser;
+
+            //        CommentRepository.Instance.AddComment(c);
+            //    }
+            //    else
+            //    {
+            //        c.Username = "Unknown user";
+            //    }
+            //    return RedirectToAction("Index");
+            //}
+            //else
+            //{
+            //    ModelState.AddModelError("CommentText", "Comment text cannot be empty!");
+            //    return Index();
+            //}
+        //}
+
+        public string getUser()
         {
-            String strComment = formData["CommentText"];
-            if (!String.IsNullOrEmpty(strComment))
+            String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            if (!String.IsNullOrEmpty(strUser))
             {
-                Comment c = new Comment();
-
-                c.CommentText = strComment;
-                String strUser = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
-                if (!String.IsNullOrEmpty(strUser))
+                int slashPos = strUser.IndexOf("\\");
+                if (slashPos != -1)
                 {
-                    int slashPos = strUser.IndexOf("\\");
-                    if (slashPos != -1)
-                    {
-                        strUser = strUser.Substring(slashPos + 1);
-                    }
-                    c.Username = strUser;
-
-                    CommentRepository.Instance.AddComment(c);
+                    strUser = strUser.Substring(slashPos + 1);
                 }
-                else
-                {
-                    c.Username = "Unknown user";
-                }
-                return RedirectToAction("Index");
             }
             else
             {
-                ModelState.AddModelError("CommentText", "Comment text cannot be empty!");
-                return Index();
+                strUser = "Unknown user";
             }
+            return strUser;
         }
 
         public ActionResult Date(int? id)
@@ -65,12 +85,19 @@ namespace VideoCommentApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddComment(string commentText)
+        public ActionResult AddComment(Comment c)
         {
-            Comment c = new Comment();
-            c.CommentText = commentText;
-
-            return Json(c, JsonRequestBehavior.AllowGet);
+            if (!String.IsNullOrEmpty(c.CommentText))
+            {
+                c.Username = getUser();
+                CommentRepository.Instance.AddComment(c);
+                foreach (Comment com in CommentRepository.Instance.GetComments())
+                {
+                    System.Console.WriteLine(com.CommentText);
+                }
+            }
+            var comments = CommentRepository.Instance.GetComments();
+            return Json(comments, JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
