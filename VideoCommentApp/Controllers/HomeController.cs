@@ -9,12 +9,11 @@ namespace VideoCommentApp.Controllers
 {
     public class HomeController : Controller
     {
-        //public string CommentText;
         public ActionResult Index()
         {
             var model = CommentRepository.Instance.GetComments();
-            //return Json(model, JsonRequestBehavior.AllowGet); 
             return View(model);
+            //return Json(model, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -42,14 +41,12 @@ namespace VideoCommentApp.Controllers
                 {
                     c.Username = "Unknown user";
                 }
-                //return RedirectToAction("Index");
-                return Json(c, JsonRequestBehavior.AllowGet);
+                return RedirectToAction("Index");
             }
             else
             {
                 ModelState.AddModelError("CommentText", "Comment text cannot be empty!");
-                return Json(strComment, JsonRequestBehavior.AllowGet);
-                //return Index();
+                return Index();
             }
         }
 
@@ -76,6 +73,7 @@ namespace VideoCommentApp.Controllers
             return Json(c, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
         public ActionResult getAllComments()
         {
             var model = CommentRepository.Instance.GetComments();
@@ -91,13 +89,14 @@ namespace VideoCommentApp.Controllers
             return Json(c, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult getLikes()
         {
             var model = CommentRepository.Instance.GetComments();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
 
-        //public string CommentText { get; set; }
+
+
     }
 }
