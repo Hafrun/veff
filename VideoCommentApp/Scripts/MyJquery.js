@@ -52,3 +52,22 @@ $('document').ready(function () {
         });
     })
 })
+
+
+/*$(function () {
+    $('.like-comment').click(function () {
+
+        var elem = $(this);
+        // Sækjum "data-id" attributeið á like takkanum
+        // sem inniheldur commentID
+        var commentID = elem.data('id');
+        // Sækjum parent element (p tagið)
+        var parent = elem.parent();
+        
+        $.post("/Home/AddLike", elem, commentID, parent, function () {
+      // Breytum innihaldinu á því elementi
+        parent.html(elem);
+    })
+
+    });
+});*/
