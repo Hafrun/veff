@@ -8,17 +8,14 @@
 
 <iframe width="560" height="315" src="//www.youtube.com/embed/OgGbNJdMaTY" frameborder="0" allowfullscreen></iframe>
 
-<div class="comments"></div>
+<ul id="commentList"></ul>
 
-    <script type="text/html" id="template">
-        @foreach (var item in Model)
-    {
+    <script type="text/html" id="commentTemplate">
 
-        <li class="list-group-item" style="max-width: 560px;">
+        <li class="list-group-item">
             <p>
                 <span class="glyphicon glyphicon-user"></span>
-                <span class="text-primary" data-content="Username">@Html.DisplayFor(modelItem => item.Username)</span>
-                <span>@Html.DisplayFor(modelItem => item.CommentText)</span>
+                <span class="text-primary" data-content="Username"></span>
                 <span data-content="CommentText"></span>
             </p>
             <p>
@@ -27,23 +24,17 @@
             </p>
 
         </li>
-        }
+     
     </script>
  
-
-<li class="list-group-item">
-    @using (Html.BeginForm())
-    {
+<ul class="list-group" style="max-width: 560px;">
+    <li class="list-group-item">
         <div class="form-horizontal">
-            <label class="sr-only" for="CommentText" id="comment-text">Comment</label>
+            <label class="sr-only" for="CommentText">Comment</label>
             <textarea class="form-control" rows="3" id="CommentText" name="CommentText"></textarea>
-            <input type="button" id="comment-button" value="Send" />
+            <button type="submit" class="btn btn-primary" id="button">Send</button>
         </div>
         @Html.ValidationSummary(false)
-    }
-</li>
 
-
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="MyJquery.js"></script>
-<script src="~/Scripts/jquery.loadTemplate-1.4.1.js"></script>
+    </li>
+</ul>

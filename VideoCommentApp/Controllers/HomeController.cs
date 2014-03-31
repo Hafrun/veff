@@ -9,12 +9,12 @@ namespace VideoCommentApp.Controllers
 {
     public class HomeController : Controller
     {
-        private string CommentText;
+        //private string CommentText;
         public ActionResult Index()
         {
             var model = CommentRepository.Instance.GetComments();
-            //return Json(model, JsonRequestBehavior.AllowGet); 
-            return View(model);
+            return Json(model, JsonRequestBehavior.AllowGet); 
+            //return View(model);
         }
 
         [HttpPost]
@@ -98,5 +98,7 @@ namespace VideoCommentApp.Controllers
             var model = CommentRepository.Instance.GetComments();
             return Json(model, JsonRequestBehavior.AllowGet);
         }
+
+        public string CommentText { get; set; }
     }
 }
